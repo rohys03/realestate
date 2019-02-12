@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rohys03.realestateweb.repository.maindb.MaindbMapper">
+    <select id="getSqlList" resultType="com.rohys03.realestateweb.repository.maindb.SqlVo">
+        <![CDATA[
+        select
+          sql_id sqlId,
+          sql_text sqlText,
+          (SELECT name FROM audit_actions WHERE ACTION = s.command_type) commandType,
+          executions executions,
+          buffer_gets bufferGets,
+          module module,
+          last_active_time lastActiveTime,
+          first_load_time firstLoadTime,
+          child_number childNumber,
+          parsing_schema_name parsingSchemaName
+        From temp$sql s
+        where 1=1
+        and rownum <= 10
+        ]]>
+    </select>
+
+    <select id="getSqlListByParsingSchemaName" resultType="com.rohys03.realestateweb.repository.maindb.SqlVo">
+        <![CDATA[
+        select
+          sql_id sqlId,
+          sql_text sqlText,
+          (SELECT name FROM audit_actions WHERE ACTION = s.command_type) commandType,
+          executions executions,
+          buffer_gets bufferGets,
+          module module,
+          last_active_time lastActiveTime,
+          first_load_time firstLoadTime,
+          child_number childNumber,
+          parsing_schema_name parsingSchemaName
+        From temp$sql s
+        where 1=1
+        and parsing_schema_name = #{name}
+        and rownum <= 10
+        ]]>
+    </select>
+</mapper>

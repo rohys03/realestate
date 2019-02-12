@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="complexData">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Data Table Example
+
+        <form action="/complexList" method="get">
+            <input type="text" name="searchString"/>
+            <botton type="submit" class="btn"> 검색 </botton>
+        </form>
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>complexNo</th>
+                    <th>complexName</th>
+                    <th>complexTypeName</th>
+                    <th>totalHouseHoldCount</th>
+                    <th>totalDongCount</th>
+                    <th>constructYearMonth</th>
+                    <th>minArea</th>
+                    <th>MaxArea</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="complex : ${complexes}">
+                    <td th:text="${complex.complexNo}"></td>
+                    <td th:text="${complex.complexName}"></td>
+                    <td th:text="${complex.complexTypeName}"></td>
+                    <td th:text="${complex.totalHouseHoldCount}"></td>
+                    <td th:text="${complex.totalDongCount}"></td>
+                    <td th:text="${complex.constructYearMonth}"></td>
+                    <td th:text="${complex.minArea}"></td>
+                    <td th:text="${complex.maxArea}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted" th:text="'[ComplexListPage] Updated yesterday at ' + ${serverTime}">Updated yesterday at 11:59 PM</div>
+</div>
+</html>

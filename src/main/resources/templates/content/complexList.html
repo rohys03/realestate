@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{decorator/realestateLayout}">
+
+<head>
+    <title>단지 목록</title>
+</head>
+
+<body>
+<th:block layout:fragment="content">
+
+<div class="card-header">
+    <i class="fas fa-table"></i>
+    단지 목록
+
+    <form action="/complexList" method="get">
+        <input type="text" name="searchString" th:value="${param.searchString}" placeholder="단지명.."/>
+        <botton type="submit" class="btn"> 검색 </botton>
+    </form>
+</div>
+
+<div class="card-body">
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>complexNo</th>
+                <th>complexName</th>
+                <th>complexTypeName</th>
+                <th>totalHouseHoldCount</th>
+                <th>totalDongCount</th>
+                <th>constructYearMonth</th>
+                <th>minArea</th>
+                <th>MaxArea</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="complex : ${complexes}">
+                <td th:text="${complex.complexNo}"></td>
+                <td th:text="${complex.complexName}"></td>
+                <td th:text="${complex.complexTypeName}"></td>
+                <td th:text="${complex.totalHouseHoldCount}"></td>
+                <td th:text="${complex.totalDongCount}"></td>
+                <td th:text="${complex.constructYearMonth}"></td>
+                <td th:text="${complex.minArea}"></td>
+                <td th:text="${complex.maxArea}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card-footer small text-muted" th:text="'[ComplexListPage] Updated yesterday at ' + ${serverTime}">Updated yesterday at 11:59 PM
+</div>
+</th:block>
+
+<th:block layout:fragment="content_script">
+    <script type="text/javascript" >
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</th:block>
+</body>
+</html>
+

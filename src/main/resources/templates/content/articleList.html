@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{decorator/realestateLayout}">
+
+<head>
+    <title>매물 목록</title>
+</head>
+
+<body>
+<th:block layout:fragment="content">
+
+<div class="card-header">
+    <i class="fas fa-table"></i>
+    매물 목록
+
+    <form class="d-none d-md-inline-block form-inline form-row" action="/articleList">
+        <div class="input-group">
+
+            <div class="col-auto input-group">
+                <input type="text" name="complexNo" class="form-control" th:value="${param.complexNo}" placeholder="Schema Name..">
+            </div>
+            <div class="col-auto input-group">
+                <input type="text" name="clctDt" class="form-control" th:value="${param.clctDt}" placeholder="Table Name..">
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<div class="card-body">
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>수집일자</th>
+                <th>complexNo</th>
+                <th>articleNo</th>
+                <th>tradeTypeName</th>
+                <th>floorInfo</th>
+                <th>dealOrWarrantPrc</th>
+                <th>areaName</th>
+                <th>buildingName</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="article : ${articles}">
+                <td th:text="${article.clct_dt}"></td>
+                <td th:text="${article.complexNo}"></td>
+                <td th:text="${article.articleNo}"></td>
+                <td th:text="${article.tradeTypeName}"></td>
+                <td th:text="${article.floorInfo}"></td>
+                <td th:text="${article.dealOrWarrantPrc}"></td>
+                <td th:text="${article.areaName}"></td>
+                <td th:text="${article.buildingName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="card-footer small text-muted" th:text="'[ComplexListPage] Updated yesterday at ' + ${serverTime}">Updated yesterday at 11:59 PM
+</div>
+</th:block>
+
+<th:block layout:fragment="content_script">
+    <script type="text/javascript" >
+        // Call the dataTables jQuery plugin
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
+</th:block>
+</body>
+</html>
+

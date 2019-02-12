@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="sqlData">
+
+    <div class="card-header">
+
+        <i class="fas fa-table">SQL Command Type 과 검색할 오브젝트명을 입력 후 검색을 누루세요.</i>
+
+        <div>
+            <p>
+            <form class="d-none d-md-inline-block form-inline form-row" action="/sqlListByObject">
+                <div class="input-group">
+                    <div class="col-auto input-group">
+                        <select name="commandType">
+                            <option value="ALL" selected>ALL</option>
+                            <option value="SELECT" >Select</option>
+                            <option value="DML">Dml</option>
+                            <option value="OTHERS">Others</option>
+                        </select>
+                    </div>
+                    <div class="col-auto input-group">
+                        <input type="text" name="owner" class="form-control" th:value="${inParams.owner}" placeholder="Schema Name..">
+                    </div>
+                    <div class="col-auto input-group">
+                        <input type="text" name="name" class="form-control" th:value="${inParams.name}" placeholder="Table Name..">
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            </p>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-wrap" id="dataTable">
+                <thead class="table-thead-wrap-size">
+                <tr>
+                    <th>inst_id</th>
+                    <th>sql_Id</th>
+                    <th>plan_hash_value</th>
+                    <th>SchemaName</th>
+                    <th>Module</th>
+                    <th>Program_ID</th>
+                    <th>Executions</th>
+                    <th>Buffer_Gets</th>
+                    <th>Blocks / Exec</th>
+                    <th>LastActiveTime</th>
+                    <th>FirstLoadTime</th>
+                    <th>CommandType</th>
+                    <th class="sqltext-wrap">Sql_Text</th>
+                </tr>
+                </thead>
+
+                <tbody class="table-tbody-wrap-size">
+                <tr th:each="sqlVo : ${model}">
+                    <td th:text="${sqlVo.instId}" ></td>
+                    <td><a th:text="${sqlVo.sqlId}" href="#layer2" class="dim-btn-layer" /></td>
+                    <td th:text="${sqlVo.planHashValue}"></td>
+                    <td th:text="${sqlVo.parsingSchemaName}"></td>
+                    <td th:text="${sqlVo.module}"></td>
+                    <td th:text="${sqlVo.programId}"></td>
+                    <td th:text="${sqlVo.executions}"></td>
+                    <td th:text="${sqlVo.bufferGets}"></td>
+                    <td th:text="${sqlVo.blockPerExec}"></td>
+                    <td th:text="${sqlVo.lastActiveTime}"></td>
+                    <td th:text="${sqlVo.firstLoadTime}"></td>
+                    <td th:text="${sqlVo.commandType}"></td>
+                    <td class="sqltext-wrap" th:text="${sqlVo.sqlText}">
+                        <
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted" th:text="'[content/sqlApplication.html] Updated yesterday at ' + ${serverTime}"> Updated </div>
+</div>
+
+
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rohys03.realestateweb.repository.landdb.ArticleMapper">
+    <select id="getArticleList" resultType="java.util.HashMap">
+        select * From landcrawler.realestate_article;
+    </select>
+
+    <select id="getArticleListByArticleName" resultType="java.util.HashMap">
+         select * From landcrawler.realestate_article
+         where 1=1
+         and articleName = #{articleName};
+    </select>
+
+    <select id="getArticleListByArticleNo" resultType="java.util.HashMap">
+        select * From landcrawler.realestate_article
+        where 1=1
+        and articleNo = #{articleNo};
+    </select>
+</mapper>

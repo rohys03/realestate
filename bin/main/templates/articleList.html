@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="/layout/header :: css"></head>
+
+<body id="page-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:include="/layout/header :: navi"></nav>
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav" th:include="/layout/sidebar :: Sidebar"></ul>
+
+    <div id="content-wrapper">
+
+
+
+    <div class="container-fluid">
+
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Overview</li>
+            </ol>
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Data Table Example</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>complexNo</th>
+                                <th>complexName</th>
+                                <th>complexTypeName</th>
+                                <th>totalHouseHoldCount</th>
+                                <th>totalDongCount</th>
+                                <th>constructYearMonth</th>
+                                <th>minArea</th>
+                                <th>MaxArea</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="complex : ${complexes}">
+                                <td th:text="${complex.complexNo}"></td>
+                                <td th:text="${complex.complexName}"></td>
+                                <td th:text="${complex.complexTypeName}"></td>
+                                <td th:text="${complex.totalHouseHoldCount}"></td>
+                                <td th:text="${complex.totalDongCount}"></td>
+                                <td th:text="${complex.constructYearMonth}"></td>
+                                <td th:text="${complex.minArea}"></td>
+                                <td th:text="${complex.maxArea}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted" th:text="'[ComplexListPage] Updated yesterday at ' + ${serverTime}">Updated yesterday at 11:59 PM</div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer" th:include="/layout/footer :: content-footer"></footer>
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<footer th:include="/layout/footer :: script"></footer>
+
+</body>
+
+</html>
